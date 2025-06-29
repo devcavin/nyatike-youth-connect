@@ -164,9 +164,9 @@ const Hero = () => {
 
         {/* Loading State */}
         {isLoading && (
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 to-yellow-200 flex items-center justify-center z-30">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-300 to-blue-200 flex items-center justify-center z-30">
             <div className="text-center text-white">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mx-auto mb-4"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
               <p className="text-lg">Loading...</p>
             </div>
           </div>
@@ -209,7 +209,7 @@ const Hero = () => {
         <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-20">
           <button
             onClick={prevImage}
-            className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-sm transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
+            className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-sm transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
             aria-label="Previous image"
             tabIndex="0"
           >
@@ -219,7 +219,7 @@ const Hero = () => {
         <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-20">
           <button
             onClick={nextImage}
-            className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-sm transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
+            className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-sm transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
             aria-label="Next image"
             tabIndex="0"
           >
@@ -232,15 +232,15 @@ const Hero = () => {
           <div className="text-center">
             {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 leading-tight">
-              <span className="block text-yellow-300 mb-2 sm:mb-4">Nyatike Youth</span>
+              <span className="block text-blue-800 mb-2 sm:mb-4">Nyatike Youth</span>
               <span className="block">Connect</span>
             </h1>
 
             {/* Location */}
-            <div className="flex items-center justify-center mb-8 text-yellow-200">
+            {/* <div className="flex items-center justify-center mb-8 text-blue-600">
               <MapPin className="w-5 h-5 mr-2" />
               <span className="text-lg font-medium">Nyatike, Migori -KE</span>
-            </div>
+            </div> */}
 
             {/* Tagline */}
             <p className="text-xl md:text-2xl font-light mb-8 opacity-90">
@@ -249,7 +249,7 @@ const Hero = () => {
 
             {/* Dynamic Content Based on Current Image */}
             <div className="mb-12 max-w-3xl mx-auto">
-              <h2 className={`text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-yellow-200 transition-all duration-500 ${
+              <h2 className={`text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-blue-700 transition-all duration-500 ${
                 !prefersReducedMotion ? 'transform' : ''
               }`}>
                 {currentImage.title}
@@ -265,13 +265,13 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
               <button
                 onClick={() => scrollToSection('projects')}
-                className="bg-yellow-400 text-black px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
+                className="bg-blue-600 text-white px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-inheirt transition-all transform hover:scale-115 shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
               >
                 Discover Our Impact
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="border-2 border-yellow-400 text-yellow-400 px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-yellow-400 hover:text-black transition-all backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
+                className="border-2 border-blue-600 text-white-400 px-8 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg hover:bg-blue-600 hover:text-black transition-all backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
               >
                 Join the Movement
               </button>
@@ -285,9 +285,9 @@ const Hero = () => {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-4 h-4 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 ${
+              className={`w-4 h-4 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 ${
                 index === currentImageIndex 
-                  ? 'bg-yellow-400 scale-125' 
+                  ? 'bg-blue-600 scale-125' 
                   : 'bg-white/50 hover:bg-white/70'
               }`}
               aria-label={`Go to slide ${index + 1}: ${heroImages[index].title}`}

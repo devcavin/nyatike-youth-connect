@@ -28,12 +28,12 @@ export const Header = () => {
     ];
 
     return (
-        <nav className="fixed top-0 w-full bg-inherited shadow-md z-50 opacity-100 backdrop-blur-md transition-all duration-500">
+        <nav className="fixed top-0 w-full bg-gradient-to-r from-gray to-gray/100 shadow-md z-50 opacity-100 backdrop-blur-lg backdrop-brightness-75 backdrop-contrast-125 transition-all duration-500">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo / Title */}
                     <a href="/" className="text-2xl transition-colors">
-                        <h1 className="text-2xl font-bold font-accent text-yellow-300">NYC</h1>
+                        <h1 className="text-2xl font-bold font-accent text-green-600">NYC</h1>
                     </a>
 
                     {/* Desktop Nav */}
@@ -42,7 +42,7 @@ export const Header = () => {
                             <button
                                 key={link.id}
                                 onClick={() => scrollToSection(link.id)}
-                                className="text-yellow-300 hover:text-white text-sm font-medium font-primary transition-colors"
+                                className="text-green-600 hover:text-white text-sm font-medium font-primary transition-colors transition-smooth"
                             >
                                 {link.label}
                             </button>
@@ -52,7 +52,7 @@ export const Header = () => {
                     {/* Mobile Menu Toggle */}
                     <div className="md:hidden">
                         <button onClick={toggleMenu}>
-                            {isMenuOpen ? <X className="h-6 w-6 text-yellow-300" /> : <Menu className="h-6 w-6 text-yellow-300" />}
+                            {isMenuOpen ? <X className="h-6 w-6 text-green-500" /> : <Menu className="h-6 w-6 text-green-500" />}
                         </button>
                     </div>
                 </div>
@@ -65,7 +65,7 @@ export const Header = () => {
                         <button
                             key={link.id}
                             onClick={() => scrollToSection(link.id)}
-                            className="block w-full text-center text-yellow-300 hover:text-white text-base font-medium font-primary"
+                            className="block w-full text-center text-green-500 hover:text-white text-base font-medium font-primary"
                         >
                             {link.label}
                         </button>

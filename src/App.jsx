@@ -8,12 +8,12 @@ import Hero from './components/Hero'
 function App() {
 
   return (
-   <>
-   <Header />
-   <div className='min-h-screen'>
-    <Hero />
-   </div>
-   </>
+    <>
+      <Header />
+      <div className='min-h-screen'>
+        <Hero />
+      </div>
+    </>
   )
 }
 
