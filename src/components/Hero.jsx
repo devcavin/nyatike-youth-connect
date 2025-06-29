@@ -232,7 +232,7 @@ const Hero = () => {
           <div className="text-center">
             {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 leading-tight">
-              <span className="block text-blue-800 mb-2 sm:mb-4">Nyatike Youth</span>
+              <span className="block text-blue-600 mb-2 sm:mb-4">Nyatike Youth</span>
               <span className="block">Connect</span>
             </h1>
 
@@ -249,7 +249,7 @@ const Hero = () => {
 
             {/* Dynamic Content Based on Current Image */}
             <div className="mb-12 max-w-3xl mx-auto">
-              <h2 className={`text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-blue-700 transition-all duration-500 ${
+              <h2 className={`text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-blue-600 transition-all duration-500 ${
                 !prefersReducedMotion ? 'transform' : ''
               }`}>
                 {currentImage.title}
