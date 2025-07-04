@@ -1,26 +1,11 @@
-/**
- * @author: Cavin
- */
+@import "tailwindcss";
 
-
- @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Sora:wght@400;600&family=Urbanist:wght@400;600&display=swap');
- @import "tailwindcss";
- 
-:root {
-  --font-primary: 'Inter', sans-serif;
-  --font-secondary: 'Poppins', sans-serif;
-  --font-accent: 'Sora', sans-serif;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
-body {
-  font-family: var(--font-primary);
+/* customize container here using tailwindcss */
+.section-container {
+  @apply  px-4 sm:px-6 lg:px-8 py-16 container mx-auto;
 }
-
-h1, h2, h3 {
-  font-family: var(--font-secondary);
-}
-
-.callout, .tagline, .hero-title {
-  font-family: var(--font-accent);
-}
-
