@@ -1,35 +1,14 @@
 import './App.css'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-/* import CompanyLogo from './components/CompanyLogo'
-import FeaturesSection from './components/FeaturesSection'
-import ScheduleSection from './components/ScheduleSection'
-import MonitorSection from './components/MonitorSection'
-import PricingSection from './components/PricingSection'
-import ServicesSection from './components/ServicesSection'
-import TestimonialsSection from './components/TestimonialsSection'
-import NewsletterSection from './components/NewsletterSection' */
-import Footer from './components/Footer'
-import About from './components/About'
+import { BrowserRouter } from 'react-router-dom'
+import { AppRoutes } from './AppRoutes'
 
 function App() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
-      <Navbar />
-      <div className="overflow-hidden">
-        <Hero />
-        <About />
-        {/* <CompanyLogo />
-        <FeaturesSection />
-        <ScheduleSection />
-        <MonitorSection />
-        <PricingSection />
-        <ServicesSection />
-        <TestimonialsSection />
-        <NewsletterSection /> */}
-      </div>
-      <Footer />
-    </main>
+    <div className="min-h-screen bg-background text-text-primary transition-colors duration-300">
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </div>
   )
 }
 

@@ -1,19 +1,263 @@
- @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Sora:wght@400;600&family=Urbanist:wght@400;600&display=swap');
- 
- @import "tailwindcss";
- 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Sora:wght@400;600&family=Urbanist:wght@400;600&display=swap');
+
+@import "tailwindcss";
+
 :root {
+  /* Fonts */
   --font-primary: 'Inter', sans-serif;
   --font-secondary: 'Poppins', sans-serif;
   --font-accent: 'Sora', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Modern OKLCH Color Palette */
+  --color-red-400: oklch(.704 .191 22.216);
+  --color-red-500: oklch(.637 .237 25.331);
+  --color-orange-500: oklch(.705 .213 47.604);
+  --color-amber-400: oklch(.828 .189 84.429);
+  --color-green-50: oklch(.982 .018 155.826);
+  --color-green-100: oklch(.962 .044 156.743);
+  --color-green-200: oklch(.925 .084 155.995);
+  --color-green-400: oklch(.792 .209 151.711);
+  --color-green-500: oklch(.723 .219 149.579);
+  --color-green-600: oklch(.627 .194 149.214);
+  --color-green-700: oklch(.527 .154 150.069);
+  --color-emerald-500: oklch(.696 .17 162.48);
+  --color-cyan-400: oklch(.789 .154 211.53);
+  --color-blue-50: oklch(.97 .014 254.604);
+  --color-blue-100: oklch(.932 .032 255.585);
+  --color-blue-200: oklch(.882 .059 254.128);
+  --color-blue-400: oklch(.707 .165 254.624);
+  --color-blue-500: oklch(.623 .214 259.815);
+  --color-blue-600: oklch(.546 .245 262.881);
+  --color-blue-700: oklch(.488 .243 264.376);
+  --color-indigo-100: oklch(.93 .034 272.788);
+  --color-indigo-600: oklch(.511 .262 276.966);
+  --color-indigo-700: oklch(.457 .24 277.023);
+  --color-gray-50: oklch(.985 .002 247.839);
+  --color-gray-100: oklch(.967 .003 264.542);
+  --color-gray-200: oklch(.928 .006 264.531);
+  --color-gray-500: oklch(.551 .027 264.364);
+  --color-gray-600: oklch(.446 .03 256.802);
+  --color-gray-700: oklch(.373 .034 259.733);
+  --color-gray-800: oklch(.278 .033 256.848);
+  --color-gray-900: oklch(.21 .034 264.665);
+  --color-black: #000;
+  --color-white: #fff;
+
+  /* Brand Colors (Light Theme) */
+  --color-primary: var(--color-blue-600);
+  --color-primary-hover: var(--color-blue-700);
+  --color-primary-light: var(--color-blue-500);
+
+  --color-secondary: var(--color-green-500);
+  --color-secondary-hover: var(--color-green-600);
+  --color-secondary-light: var(--color-green-400);
+
+  /* Backgrounds */
+  --color-background: var(--color-white);
+  --color-surface: var(--color-gray-50);
+  --color-surface-hover: var(--color-gray-100);
+
+  /* Text */
+  --color-text-heading: var(--color-gray-900);
+  --color-text-primary: var(--color-gray-700);
+  --color-text-secondary: var(--color-gray-600);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-on-primary: var(--color-white);
+
+  /* Buttons */
+  --color-button-primary: var(--color-primary);
+  --color-button-primary-hover: var(--color-primary-hover);
+  --color-button-secondary: var(--color-secondary);
+  --color-button-secondary-hover: var(--color-secondary-hover);
+  --color-button-text: var(--color-white);
+
+  /* Borders */
+  --color-border: var(--color-gray-200);
+  --color-border-hover: var(--color-gray-500);
+  --color-border-focus: var(--color-primary);
+
+  /* Utility Colors */
+  --color-accent: var(--color-primary-light);
+  --color-success: var(--color-green-500);
+  --color-warning: var(--color-amber-400);
+  --color-error: var(--color-red-500);
+  --color-info: var(--color-blue-400);
+}
+
+[data-theme="dark"] {
+  /* Brand Colors (Dark Theme) - Adjusted for better contrast */
+  --color-primary: var(--color-blue-400);
+  --color-primary-hover: var(--color-blue-500);
+  --color-primary-light: var(--color-blue-200);
+
+  --color-secondary: var(--color-green-400);
+  --color-secondary-hover: var(--color-green-500);
+  --color-secondary-light: var(--color-green-200);
+
+  /* Backgrounds */
+  --color-background: var(--color-gray-900);
+  --color-surface: var(--color-gray-800);
+  --color-surface-hover: var(--color-gray-700);
+
+  /* Text */
+  --color-text-heading: var(--color-white);
+  --color-text-primary: var(--color-gray-100);
+  --color-text-secondary: var(--color-gray-200);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-on-primary: var(--color-gray-900);
+
+  /* Buttons */
+  --color-button-primary: var(--color-primary);
+  --color-button-primary-hover: var(--color-primary-hover);
+  --color-button-secondary: var(--color-secondary);
+  --color-button-secondary-hover: var(--color-secondary-hover);
+  --color-button-text: var(--color-gray-900);
+
+  /* Borders */
+  --color-border: var(--color-gray-700);
+  --color-border-hover: var(--color-gray-600);
+  --color-border-focus: var(--color-primary);
+
+  /* Utility Colors */
+  --color-accent: var(--color-primary-light);
+  --color-success: var(--color-green-400);
+  --color-warning: var(--color-amber-400);
+  --color-error: var(--color-red-400);
+  --color-info: var(--color-cyan-400);
 }
 
 body {
   font-family: var(--font-primary);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6; /* Better readability */
 }
 
-h1, h2, h3 {
+/* Heading styles with proper hierarchy */
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-secondary);
+  color: var(--color-text-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  transition: color 0.3s ease;
+}
+
+h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+
+h2 {
+  font-size: 2rem; /* 32px */
+  color: var(--color-text-heading);
+}
+
+h3 {
+  font-size: 1.5rem; /* 24px */
+  color: var(--color-text-heading);
+}
+
+/* Paragraph styles */
+p {
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+/* Links */
+a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* Button base styles - using @layer base for lower specificity */
+@layer base {
+  button {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  button:focus-visible {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-border-focus), transparent 50%);
+  }
+}
+
+/* Button component styles - using @layer components */
+@layer components {
+  .btn {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .btn:focus-visible {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-border-focus), transparent 50%);
+  }
+
+  .btn-primary {
+    background-color: var(--color-button-primary);
+    color: var(--color-button-text);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-button-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--color-button-primary), transparent 80%);
+  }
+
+  .btn-secondary {
+    background-color: var(--color-button-secondary);
+    color: var(--color-button-text);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--color-button-secondary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--color-button-secondary), transparent 80%);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+
+  .btn-outline:hover:not(:disabled) {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-text-primary);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background-color: var(--color-surface-hover);
+    transform: translateY(-1px);
+  }
 }
 
 html {
@@ -23,5 +267,106 @@ html {
 
 /* customize container here using tailwindcss */
 .section-container {
-  @apply  px-4 sm:px-6 lg:px-8 py-16 container mx-auto;
+  padding: 4rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .section-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Utility classes for granular color control - using @layer utilities */
+@layer utilities {
+  /* Theme-aware text utilities */
+  .text-theme-primary { color: var(--color-primary) !important; }
+  .text-theme-secondary { color: var(--color-secondary) !important; }
+  .text-theme-muted { color: var(--color-text-muted) !important; }
+  .text-theme-heading { color: var(--color-text-heading) !important; }
+  .text-theme-on-primary { color: var(--color-text-on-primary) !important; }
+
+  /* Theme-aware background utilities */
+  .bg-theme-surface { background-color: var(--color-surface) !important; }
+  .bg-theme-surface-hover { background-color: var(--color-surface-hover) !important; }
+  .bg-theme-primary { background-color: var(--color-primary) !important; }
+  .bg-theme-secondary { background-color: var(--color-secondary) !important; }
+  .bg-theme-background { background-color: var(--color-background) !important; }
+
+  /* Theme-aware border utilities */
+  .border-theme-default { border-color: var(--color-border) !important; }
+  .border-theme-hover { border-color: var(--color-border-hover) !important; }
+  .border-theme-focus { border-color: var(--color-border-focus) !important; }
+
+  /* State utility classes */
+  .text-theme-success { color: var(--color-success) !important; }
+  .text-theme-warning { color: var(--color-warning) !important; }
+  .text-theme-error { color: var(--color-error) !important; }
+  .text-theme-info { color: var(--color-info) !important; }
+
+  .bg-theme-success { background-color: var(--color-success) !important; }
+  .bg-theme-warning { background-color: var(--color-warning) !important; }
+  .bg-theme-error { background-color: var(--color-error) !important; }
+  .bg-theme-info { background-color: var(--color-info) !important; }
+}
+
+/* Legacy utility classes (lower specificity - can be overridden by Tailwind) */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-heading { color: var(--color-text-heading); }
+.text-on-primary { color: var(--color-text-on-primary); }
+
+.bg-surface { background-color: var(--color-surface); }
+.bg-surface-hover { background-color: var(--color-surface-hover); }
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+
+.border-default { border-color: var(--color-border); }
+.border-hover { border-color: var(--color-border-hover); }
+.border-focus { border-color: var(--color-border-focus); }
+
+/* State utility classes */
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-error { color: var(--color-error); }
+.text-info { color: var(--color-info); }
+
+.bg-success { background-color: var(--color-success); }
+.bg-warning { background-color: var(--color-warning); }
+.bg-error { background-color: var(--color-error); }
+.bg-info { background-color: var(--color-info); }
+
+/* Enhanced button variants */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-surface-hover);
+  transform: translateY(-1px);
 }

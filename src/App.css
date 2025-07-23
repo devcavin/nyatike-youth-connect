@@ -1,5 +1,5 @@
 .active {
-  color: darkgreen;
+  color: rgb(var(--color-primary));
 }
 
 @keyframes marquee {
