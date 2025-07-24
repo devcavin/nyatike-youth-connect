@@ -27,13 +27,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-1 mb-6">
-              <div className="w-4 h-4 rounded-full opacity-75"></div>
-              <div className="w-4 h-4 rounded-full"></div>
-              <span className="text-xl font-medium ml-1">NYC</span>
-            </div>
             <p className="mb-6">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique sit, tenetur non odio suscipit nemo at repellat pariatur maiores, alias aut fugiat repudiandae, nobis ullam quibusdam voluptas modi sunt vel?
+              Follow us on our social media platforms to stay updated with our latest news, events, and initiatives. Join our community and be part of the change!
             </p>
             <div className="flex gap-4">
               <a
@@ -91,7 +86,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div
-          className="mt-12 pt-8 border-t transition-colors"
+          className="mt-12 pt-8 transition-colors"
           style={{
             borderColor: 'rgb(var(--color-border))',
           }}

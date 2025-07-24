@@ -370,3 +370,95 @@ html {
   background-color: var(--color-surface-hover);
   transform: translateY(-1px);
 }
+
+/* Text Shadow Utilities for Better Text Visibility */
+@layer utilities {
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-shadow-md {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  }
+  
+  .text-shadow-xl {
+    text-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Force white text utilities for hero sections */
+  .hero-text-white {
+    color: #ffffff !important;
+  }
+  
+  .hero-text-light {
+    color: #f8fafc !important;
+  }
+  
+  .hero-border-white {
+    border-color: #ffffff !important;
+  }
+}
+
+/* Hero specific styles */
+.hero-image img {
+  filter: brightness(0.75) contrast(1.15);
+}
+
+/* Enhanced hero text visibility */
+.hero-image h2,
+.hero-image h1 {
+  color: #ffffff !important;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-image p {
+  color: #f1f5f9 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-image button {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.hero-image button:hover {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+/* Force white text in light theme for hero sections */
+:root .hero-image * {
+  color: #ffffff !important;
+}
+
+:root .hero-image h1,
+:root .hero-image h2,
+:root .hero-image h3 {
+  color: #ffffff !important;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9), 0 2px 6px rgba(0, 0, 0, 0.7) !important;
+}
+
+:root .hero-image p {
+  color: #f8fafc !important;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Custom carousel styles */
+.carousel-container .react-multi-carousel-dot-list {
+  bottom: 20px;
+}
+
+.carousel-container .react-multi-carousel-dot button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid white;
+  width: 12px;
+  height: 12px;
+}
+
+.carousel-container .react-multi-carousel-dot--active button {
+  background-color: white;
+}
