@@ -1,16 +1,15 @@
-import heroImage1 from "../../../../assets/hero/heroImage1.jpg";
-import heroImage2 from "../../../../assets/hero/heroImage2.webp";
-import heroImage3 from "../../../../assets/hero/heroImage3.webp";
+import homebg1 from "../../../assets/images/home/homebg2.jpg";
+import homebg2 from "../../../assets/images/home/homebg2.jpg";
 
 
 
-const HeroData = [
+const HomeData = [
   {
     id: 1,
     title: "Innovate. Create. Transform.",
     description:
       "Join the movement of thinkers, creators, and problem solvers. Together, we build solutions that shape the future of individuals, communities, health, technology and business.",
-    imageUrl: heroImage1,
+    imageUrl: homebg1,
     buttonUrl: "/contact",
     buttonDesc: "Get Involved",
   },
@@ -19,7 +18,7 @@ const HeroData = [
     title: "Empowering Startups & Visionaries",
     description:
       "Unlock your potential with mentorship, collaboration, and networking opportunities. Nyatike Youth Connect is the launchpad for your success.",
-    imageUrl: heroImage2,
+    imageUrl: homebg2,
     buttonUrl: "/services",
     buttonDesc: "Discover Visions",
   },
@@ -28,10 +27,10 @@ const HeroData = [
     title: "Mission Meets Impact",
     description:
       "From AI to sustainability, we explore cutting-edge innovations that drive social and economic impact in our communities.",
-    imageUrl: heroImage3,
+    imageUrl: homebg1,
     buttonUrl: "/blogs",
     buttonDesc: "See Our Success Stories",
   },
 ];
 
-export { HeroData };
+export { HomeData };

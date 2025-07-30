@@ -6,7 +6,6 @@ import logo from "../../assets/logo.png"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeLink, setActiveLink] = useState("home")
   const { isDarkMode, toggleTheme } = useTheme()
 
   const navLinks = [
@@ -18,12 +17,10 @@ const Navbar = () => {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-background/90 backdrop-blur-sm z-50 shadow-sm transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-bg bg-background/100 backdrop-blur-sm transition-all duration-300">
       <div className="w-full flex justify-between items-center container mx-auto px-4 sm:px-6 lg:px-8 md:h-20 h-16">
         {/* Logo */}
         <div className="flex items-center gap-1 cursor-pointer">
-          <div className="w-4 h-4 bg-primary-blue rounded-full opacity-75 hover:opacity-100 transition-opacity"></div>
-          <div className="w-4 h-4 bg-primary-green rounded-full -ml-2 hover:opacity-75 transition-opacity"></div>
           <span>
             <a href="/">
               <img src={logo} alt="Nyatike Youth Connect Logo" className='w-25' />
@@ -35,7 +32,7 @@ const Navbar = () => {
           {/* Mobile Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg bg-surface hover:bg-surface-hover text-text-primary transition-all duration-300"
+            className="p-2 transition-all duration-300"
             aria-label="Toggle theme"
           >
             {isDarkMode ? (
@@ -64,9 +61,7 @@ const Navbar = () => {
             <a
               key={index}
               href={link.href}
-              onClick={() => setActiveLink(link.href)}
-              className={`text-md font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all transition-colors duration-300
-                ${activeLink === link.href ? 'text-primary after:w-full' : 'text-text-secondary hover:text-text-primary'}`}
+              className={`text-md font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all transition-colors duration-300`}
             >
               {link.label}
             </a>
@@ -78,7 +73,7 @@ const Navbar = () => {
           {/* Desktop Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg bg-surface hover:bg-surface-hover text-text-primary transition-all duration-300"
+            className="p-2 transition-all duration-300"
             aria-label="Toggle theme"
           >
             {isDarkMode ? (
@@ -92,20 +87,16 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background transition-all duration-300">
+        <div className="md:hidden bg-background transition-all duration-300">
           <div className="container mx-auto px-4 space-y-4 py-4 text-center">
             {navLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.href}
                 onClick={() => {
-                  setActiveLink(link.href);
                   setIsMenuOpen(false);
                 }}
-                className={`block text-md font-medium py-2 transition-colors duration-300 ${activeLink === link.href
-                    ? 'text-primary'
-                    : 'text-text-secondary hover:text-text-primary'
-                  }`}
+                className={`block text-md font-medium py-2 transition-colors duration-300`}
               >
                 {link.label}
               </a>

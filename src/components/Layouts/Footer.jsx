@@ -1,8 +1,6 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
-import { useTheme } from '../Context/UseTheme'
 
 const Footer = () => {
-  const { isDarkMode } = useTheme()
 
   const footerLinks = {
     company: [
@@ -14,14 +12,9 @@ const Footer = () => {
     contact: [{ name: 'WhatsApp', href: '/' }],
   }
 
-  // Optional: toggle data-theme attribute on root for CSS variables to switch
-  // or rely on your theme context elsewhere
-
   return (
     <footer
-      className={`transition-colors duration-300 ease-in-out
-        ${isDarkMode ? 'bg-[var(--color-background)] text-[var(--color-text-primary)]' : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'}`}
-      // Since variables handle colors for both themes, this is the same
+      className="transition-colors duration-300 ease-in-out"
     >
       <div className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
