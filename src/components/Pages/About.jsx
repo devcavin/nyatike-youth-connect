@@ -1,5 +1,7 @@
-import leader1 from "../../assets/images/about/leaders/leader1.jpeg"
-import leader2 from "../../assets/images/about/leaders/leader2.jpeg"
+// import leader1 from "../../assets/images/about/leaders/leader1.jpeg"
+// import leader2 from "../../assets/images/about/leaders/leader2.jpeg"
+// import leader3 from "../../assets/images/about/leaders/leader3.jpeg"
+import Management from "./Subpages/Management"
 
 export const About = () => {
     return (
@@ -12,6 +14,30 @@ export const About = () => {
                         NYC is more than a youth group it&apos;s a vision to unite, inspire, and elevate every young person across our sub-county. We&apos;re building a space where ideas grow, voices matter, and opportunities are within reach. This is our time to rise together.
                     </p>
 
+                </div>
+            </section>
+
+            {/* Impact Numbers Section */}
+            <section className="py-20 px-6">
+                <div className="max-w-6xl mx-auto">
+                    <div className="grid md:grid-cols-4 gap-8 text-center">
+                        <div className="p-6 rounded-xl transition-all duration-300">
+                            <div className="text-4xl md:text-5xl font-bold mb-2">500+</div>
+                            <div>Youth Empowered</div>
+                        </div>
+                        <div className="p-6 rounded-xl transition-all duration-300">
+                            <div className="text-4xl md:text-5xl font-bold mb-2">50+</div>
+                            <div>Projects Completed</div>
+                        </div>
+                        <div className="p-6 rounded-xl transition-all duration-300">
+                            <div className="text-4xl md:text-5xl font-bold mb-2">15+</div>
+                            <div>Partner Organizations</div>
+                        </div>
+                        <div className="p-6 rounded-xl transition-all duration-300">
+                            <div className="text-4xl md:text-5xl font-bold mb-2">4</div>
+                            <div>Years of Impact</div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -106,13 +132,43 @@ export const About = () => {
                                 Today, we&apos;re proud to be a community where young people from diverse backgrounds come together to learn, grow, and make a difference in their communities through innovative projects and collaborative initiatives.
                             </p>
                         </div>
+
+                         {/* Enhanced Timeline */}
                         <div className="space-y-6">
-                            <div className="flex items-start space-x-4 p-6 rounded-lg shadow-md">
-                                <div className="w-6 h-6 rounded-full mt-2 flex-shrink-0">
+                            <div className="flex items-start space-x-4 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mt-2 flex-shrink-0 flex items-center justify-center">
+                                    <span className="text-sm font-bold">1</span>
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-xl mb-2">2020</h4>
                                     <p>Started with 3 passionate young volunteers</p>
+                                </div>                            
+                            </div>
+                            <div className="flex items-start space-x-4 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                                <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full mt-2 flex-shrink-0 flex items-center justify-center">
+                                    <span className="text-sm font-bold">2</span>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-xl mb-2">2021</h4>
+                                    <p>First major community project launched</p>
+                                </div>                            
+                            </div>
+                            <div className="flex items-start space-x-4 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full mt-2 flex-shrink-0 flex items-center justify-center">
+                                    <span className="text-sm font-bold">3</span>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-xl mb-2">2022</h4>
+                                    <p>Partnership with local schools established</p>
+                                </div>                            
+                            </div>
+                            <div className="flex items-start space-x-4 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                                <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mt-2 flex-shrink-0 flex items-center justify-center">
+                                    <span className="text-sm font-bold">4</span>
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-xl mb-2">2024</h4>
+                                    <p>Regional recognition and 500+ active members</p>
                                 </div>                            
                             </div>
                         </div>
@@ -120,48 +176,70 @@ export const About = () => {
                 </div>
             </section>
 
-            {/* Leadership Team */}
+            {/* Success Stories/Testimonials */}
             <section className="py-20 px-6">
                 <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-16">                       
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6">Meet Our Team</h2>
-                        <p className="text-xl max-w-3xl mx-auto leading-relaxed">
-                            Passionate young leaders driving positive change in our communities
-                        </p>
-                    </div>                    
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <div className="rounded-xl p-8 shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                            <div className="rounded-full mx-auto mb-6 flex items-center justify-center">
-                                <img src={leader2} alt="Image of the director" className="rounded-xl w-45 h-50" />    
+                    <h2 className="text-4xl font-bold text-center mb-16">Voices from Our Community</h2>
+                    <div className="grid md:grid-cols-2 gap-8">
+                        <div className="bg-background/10 backdrop-blur-sm p-8 rounded-xl border border-background/20 hover:bg-background/20 transition-all duration-300">
+                            <div className="flex items-center mb-4">
+                                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center font-bold text-lg">
+                                    A
+                                </div>
+                                <div className="ml-4">
+                                    <h4 className="font-bold text-lg">Sarah M.</h4>
+                                    <p>Community Volunteer</p>
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold mb-2">Mr Maurice</h3>
-                            <h4 className="font-medium mb-4">Leadership & Strategy</h4>
-                            <p className="text-sm leading-relaxed">                                
-                                Leading our community&apos;s vision and ensuring we stay true to our mission of empowering youth.
+                            <p className="italic leading-relaxed">
+                                &ldquo;NYC helped me discover my leadership potential and connected me with opportunities I never knew existed. The mentorship program changed my life completely.&rdquo;
                             </p>
                         </div>
-                        <div className="rounded-xl p-8 shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                            <div className="rounded-full mx-auto mb-6 flex items-center justify-center">
-                                <img src={leader1} alt="Image of the programs coordinator" className="rounded-xl w-45 h-50" />    
+                        <div className="bg-background/10 backdrop-blur-sm p-8 rounded-xl border border-background/20 hover:bg-background/20 transition-all duration-300">
+                            <div className="flex items-center mb-4">
+                                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center font-bold text-lg">
+                                    J
+                                </div>
+                                <div className="ml-4">
+                                    <h4 className="font-bold text-lg">John K.</h4>
+                                    <p>Community Member</p>
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold mb-2">Mr Ambrosse</h3>
-                            <h4 className="font-medium mb-4">Events & Projects</h4>
-                            <p className="text-sm leading-relaxed">                                
-                                Organizing impactful programs, workshops, and community service projects that make a difference.
-                            </p>
-                        </div>
-                        <div className="rounded-xl p-8 shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                            <div className="rounded-full mx-auto mb-6 flex items-center justify-center">
-                                <img src={""} alt="Image of the community outricher" className="rounded-xl w-45 h-50" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-2">Mr Ibrahim</h3>
-                            <h4 className="font-medium mb-4">Community Engagement</h4>
-                            <p className="text-sm leading-relaxed">                                
-                                Building connections with new members and partner organizations to expand our impact.
+                            <p className="italic leading-relaxed">
+                                &ldquo;Being part of NYC taught me that young people can make real change happen. Our community projects have impacted hundreds of families.&rdquo;
                             </p>
                         </div>
                     </div>
                 </div>
+            </section>
+
+            {/* Current Programs */}
+            <section className="py-20 px-6">
+                <div className="max-w-6xl mx-auto">
+                    <h2 className="text-4xl font-bold text-center mb-16">Our Programs</h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="p-6 rounded-xl shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                            <h3 className="text-xl font-bold mb-3">Youth Leadership Guidance</h3>
+                            <p className="mb-4">A program developing next-generation leaders</p>
+                            <div className="text-sm text-blue-600 font-semibold">Every Sarturday, 08:00 PM</div>
+                        </div>
+                        <div className="p-6 rounded-xl shadow-lg border-l-4 border-green-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                            <h3 className="text-xl font-bold mb-3">Community Action Projects</h3>
+                            <p className="mb-4">Hands-on initiatives addressing local challenges</p>
+                            <div className="text-sm text-green-600 font-semibold">Contact management</div>
+                        </div>
+                        <div className="p-6 rounded-xl shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                            <h3 className="text-xl font-bold mb-3">Peer Mentorship Network</h3>
+                            <p className="mb-4">Connecting experienced members with newcomers</p>
+                            <div className="text-sm text-purple-600 font-semibold">Always Open</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Leadership Team */}
+            <section className="py-20 px-6">
+                <Management />
             </section>
 
             {/* What We Do */}
