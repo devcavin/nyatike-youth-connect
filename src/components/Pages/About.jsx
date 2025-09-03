@@ -1,6 +1,3 @@
-// import leader1 from "../../assets/images/about/leaders/leader1.jpeg"
-// import leader2 from "../../assets/images/about/leaders/leader2.jpeg"
-// import leader3 from "../../assets/images/about/leaders/leader3.jpeg"
 import Management from "./Subpages/Management"
 
 export const About = () => {

@@ -4,6 +4,8 @@ import Navbar from './components/Layouts/Navbar'
 import Footer from "./components/Layouts/Footer"
 import { Home } from "./components/Pages/Home"
 import { About } from "./components/Pages/About"
+import Services from "./components/Pages/Services"
+import Blogs from "./components/Pages/Blogs"
 
 export const AppRoutes = () => {
     return (
@@ -13,6 +15,8 @@ export const AppRoutes = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/blogs" element={<Blogs />} />
                 </Routes>
             </div>
             <Footer />
