@@ -4,10 +4,10 @@ import { BsPeople } from "react-icons/bs";
 import { ChartColumnIcon, ChartNoAxesCombined, Handshake } from "lucide-react";
 
 // images
-import homebg1 from "../../assets/images/home/homebg1.jpeg";
+import homebg1 from "../../assets/images/home/homebg1.png";
 import homebg2 from "../../assets/images/home/homebg2.jpeg";
 import homebg3 from "../../assets/images/home/homebg3.jpeg";
-// import homebg4 from "../../assets/images/home/homebg4.jpeg";
+import homebg4 from "../../assets/images/home/homebg4.jpeg";
 
 const HomeData = [
     {
@@ -34,14 +34,14 @@ const HomeData = [
         buttonDesc: "Join Our Community",
         buttonUrl: "/community"
     },
-    // {
-    //     id: 4,
-    //     imageUrl: homebg4,
-    //     title: "Transforming Ideas into Impact",
-    //     description: "Develop professional and personal skills through workshops, training programs, and hands-on experience.",
-    //     buttonDesc: "Learn More",
-    //     buttonUrl: "/about"
-    // }
+    {
+        id: 4,
+        imageUrl: homebg4,
+        title: "Transforming Ideas into Impact",
+        description: "Develop professional and personal skills through workshops, training programs, and hands-on experience.",
+        buttonDesc: "Learn More",
+        buttonUrl: "/about"
+    }
 ];
 
 const features = [

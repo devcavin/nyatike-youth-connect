@@ -1,4 +1,4 @@
-import seminarImage1 from "../../assets/images/home/homebg1.jpeg";
+import seminarImage1 from "../../assets/images/home/homebg2.jpeg";
 
 const posts = [
   {
