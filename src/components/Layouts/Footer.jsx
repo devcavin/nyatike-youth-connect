@@ -1,4 +1,4 @@
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
+import { FaFacebookF, FaLinkedinIn, FaWhatsapp, FaInstagram } from 'react-icons/fa'
 
 const Footer = () => {
 
@@ -37,10 +37,10 @@ const Footer = () => {
                 <FaFacebookF className="w-5 h-5" />
               </a>
               <a
-                href="/"
+                href="https://instagram.com/nyatikeyouthconnect"
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               >
-                <FaTwitter className="w-5 h-5" />
+                <FaInstagram className="w-5 h-5" />
               </a>
               <a
                 href="/"
