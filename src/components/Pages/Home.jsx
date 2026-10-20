@@ -1,48 +1,8 @@
-import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { BsPeople } from "react-icons/bs";
 import { ChartColumnIcon, ChartNoAxesCombined, Handshake } from "lucide-react";
 
-// images
-import homebg1 from "../../assets/images/home/homebg1.png";
-import homebg2 from "../../assets/images/home/homebg2.jpeg";
-import homebg3 from "../../assets/images/home/homebg3.jpeg";
-import homebg4 from "../../assets/images/home/homebg4.jpeg";
-
-const HomeData = [
-    {
-        id: 1,
-        imageUrl: homebg1,
-        title: "Empowering Youth Innovation",
-        description: "Join a community of passionate young leaders creating positive change through collaboration, innovation, and impact.",
-        buttonDesc: "Get Started",
-        buttonUrl: "/services"
-    },
-    {
-        id: 2,
-        imageUrl: homebg2,
-        title: "Build Tomorrow's Solutions",
-        description: "Access cutting-edge resources, mentorship, and collaborative spaces to turn your ideas into reality.",
-        buttonDesc: "Explore Programs",
-        buttonUrl: "/about"
-    },
-    {
-        id: 3,
-        imageUrl: homebg3,
-        title: "Connect, Collaborate, Create",
-        description: "Engage with like-minded individuals and work together on projects that create meaningful change in our communities.",
-        buttonDesc: "Join Our Community",
-        buttonUrl: "/community"
-    },
-    {
-        id: 4,
-        imageUrl: homebg4,
-        title: "Transforming Ideas into Impact",
-        description: "Develop professional and personal skills through workshops, training programs, and hands-on experience.",
-        buttonDesc: "Learn More",
-        buttonUrl: "/about"
-    }
-];
+import { HomeHero } from "./Subpages/HomeHero";
 
 const features = [
     {
@@ -73,19 +33,6 @@ const stats = [
 ];
 
 export const Home = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        setIsVisible(true);
-
-        const interval = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % HomeData.length);
-        }, 6000);
-
-        return () => clearInterval(interval);
-    }, []);
-
     const navigateRequiredPage = (link) => {
         console.log(`Navigating to: ${link}`);
     };
@@ -102,70 +49,7 @@ export const Home = () => {
 
     return (
         <div className="w-full">
-            {/* Hero Carousel Section */}
-            <section className="relative overflow-hidden" aria-label="Hero carousel">
-                <div className="relative h-screen min-h-[600px] max-h-[800px]">
-                    {HomeData.map((item, index) => (
-                        <div
-                            key={item.id}
-                            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
-                                }`}
-                        >
-                            {/* Background Image with overlay */}
-                            <div className="absolute inset-0">
-                                <img
-                                    src={item.imageUrl}
-                                    alt=""
-                                    className="w-full h-full object-cover"
-                                    loading={index === 0 ? "eager" : "lazy"}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
-                            </div>
-
-                            {/* Content */}
-                            <div className="absolute inset-0 flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
-                                <div className={`max-w-5xl mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 drop-shadow-lg leading-tight">
-                                        {item.title}
-                                    </h1>
-                                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-8 sm:mb-10 text-white/95 drop-shadow-md leading-relaxed font-light px-4">
-                                        {item.description}
-                                    </p>
-                                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                                        <button
-                                            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/50 min-w-[180px] sm:min-w-[200px]"
-                                            onClick={() => navigateRequiredPage(item.buttonUrl)}
-                                            aria-label={`${item.buttonDesc} - ${item.title}`}
-                                        >
-                                            {item.buttonDesc}
-                                        </button>
-                                        <button
-                                            className="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/50 min-w-[180px] sm:min-w-[200px]"
-                                            onClick={() => navigateRequiredPage("/about")}
-                                            aria-label="Learn more about our organization"
-                                        >
-                                            Learn More
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Carousel Indicators */}
-                <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                    {HomeData.map((_, index) => (
-                        <button
-                            key={index}
-                            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-white' : 'bg-white/50'
-                                }`}
-                            onClick={() => setCurrentSlide(index)}
-                            aria-label={`Go to slide ${index + 1}`}
-                        />
-                    ))}
-                </div>
-            </section>
+            <HomeHero />
 
             {/* Trust Indicators / Stats Section */}
             <section className="py-12 sm:py-16" aria-label="Organization statistics">
