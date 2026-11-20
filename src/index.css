@@ -562,3 +562,517 @@ html {
 .carousel-container .react-multi-carousel-dot--active button {
   background-color: white;
 }
+
+/* ==========================================================================
+   Site header and primary navigation
+   --------------------------------------------------------------------------
+   Scoped component classes, intentionally UNLAYERED. The global `a`, `h1`-`h6`
+   and `p` rules above are unlayered too, so they beat Tailwind utilities (which
+   live in @layer utilities); a class selector beats them on specificity without
+   needing !important. Colours come from the existing semantic tokens only.
+   Background: docs/modernization-audit.md, findings F-03 and F-07.
+   ========================================================================== */
+:root {
+  --header-h: 4rem;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --header-h: 5rem;
+  }
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: var(--header-h);
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 60;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.site-skip-link:hover {
+  color: var(--color-text-on-primary);
+}
+
+.site-skip-link:focus-visible {
+  top: 0.75rem;
+  outline: 2px solid var(--color-text-heading);
+  outline-offset: 2px;
+}
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.5rem;
+  color: var(--color-text-heading);
+}
+
+.site-brand:hover {
+  color: var(--color-text-heading);
+}
+
+.site-brand__logo {
+  height: 2.75rem;
+  width: auto;
+  flex-shrink: 0;
+}
+
+@media (min-width: 48rem) {
+  .site-brand__logo {
+    height: 3rem;
+  }
+}
+
+.site-brand__name {
+  display: none;
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.15;
+  color: var(--color-text-heading);
+}
+
+@media (min-width: 23.75rem) {
+  .site-brand__name {
+    display: inline;
+  }
+}
+
+.site-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  transition: color 0.2s ease;
+}
+
+.site-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.25rem;
+  height: 2px;
+  border-radius: 9999px;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.site-nav-link:hover {
+  color: var(--color-text-heading);
+}
+
+.site-nav-link:hover::after,
+.site-nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+.site-nav-link.is-active,
+.site-nav-link.is-active:hover {
+  color: var(--color-primary);
+}
+
+.site-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background-color: transparent;
+  color: var(--color-text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.site-icon-btn:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-text-heading);
+}
+
+/* Hidden from md up. Done here, not with Tailwind's `md:hidden`: this unlayered
+   `display` would otherwise override that layered utility. */
+@media (min-width: 48rem) {
+  .site-icon-btn--menu {
+    display: none;
+  }
+}
+
+.site-brand:focus-visible,
+.site-nav-link:focus-visible,
+.site-icon-btn:focus-visible,
+.site-menu-link:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.site-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 16px 24px -16px rgb(0 0 0 / 0.3);
+  animation: site-menu-in 0.15s ease-out;
+}
+
+.site-menu ul {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0.5rem 1rem 1rem;
+  list-style: none;
+}
+
+.site-menu-link {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 3px solid transparent;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 1.0625rem;
+  color: var(--color-text-primary);
+}
+
+.site-menu-link:hover {
+  background-color: var(--color-surface-hover);
+  color: var(--color-text-heading);
+}
+
+.site-menu-link.is-active,
+.site-menu-link.is-active:hover {
+  border-left-color: var(--color-primary);
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+}
+
+@keyframes site-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}
+
+/* The skip link targets <main>, which is focused programmatically only. */
+#main-content:focus {
+  outline: none;
+}
+
+/* ==========================================================================
+   Home hero (carousel)
+   --------------------------------------------------------------------------
+   Same layering note as above. Text is always white on a dark scrim; both
+   themes therefore share the hero text colours. Buttons use the existing
+   button tokens. Autoplay is driven by the active progress segment's CSS
+   animation (see HomeHero.jsx), so pause/hover/focus freeze it exactly.
+   ========================================================================== */
+.home-hero {
+  --hero-interval: 7s;
+  position: relative;
+  display: flex;
+  min-height: 34rem;
+  min-height: clamp(34rem, calc(100svh - var(--header-h)), 46rem);
+  overflow: hidden;
+  background-color: #000;
+}
+
+.home-hero__media {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+}
+
+.home-hero__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.home-hero__img.is-active {
+  opacity: 1;
+}
+
+/* The emblem artwork is a logo on pure black (its drawing spans roughly 25%-82% of the
+   image width): keep it whole, never crop it. Above the text on small screens, and
+   shifted to the right of the text from lg up. */
+.home-hero__img--emblem {
+  inset: 0 0 auto 0;
+  height: 55%;
+  object-fit: contain;
+  object-position: 50% 40%;
+}
+
+@media (min-width: 64rem) {
+  .home-hero__img--emblem {
+    inset: 0 0 0 14%;
+    height: 100%;
+    object-position: 50% 50%;
+  }
+}
+
+.home-hero__scrim {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.8s ease;
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 0.88) 0%,
+    rgb(0 0 0 / 0.64) 50%,
+    rgb(0 0 0 / 0.42) 100%
+  );
+}
+
+@media (min-width: 48rem) {
+  .home-hero__scrim {
+    background:
+      linear-gradient(to top, rgb(0 0 0 / 0.8) 0%, rgb(0 0 0 / 0.4) 55%, rgb(0 0 0 / 0.2) 100%),
+      linear-gradient(to right, rgb(0 0 0 / 0.62) 0%, rgb(0 0 0 / 0.3) 60%, rgb(0 0 0 / 0) 100%);
+  }
+}
+
+/* The emblem slide is already black behind the text, so it needs no scrim. */
+.home-hero[data-emblem="true"] .home-hero__scrim {
+  opacity: 0;
+}
+
+.home-hero__inner {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.home-hero__slide-body {
+  max-width: 40rem;
+  animation: home-hero-rise 0.5s ease-out both;
+}
+
+.home-hero__title {
+  margin: 0 0 1rem;
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  font-size: clamp(2rem, 1.35rem + 2.8vw, 3.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-wrap: balance;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.35);
+}
+
+.home-hero__desc {
+  max-width: 34rem;
+  margin: 0 0 1.75rem;
+  font-size: clamp(1rem, 0.95rem + 0.4vw, 1.2rem);
+  line-height: 1.6;
+  color: rgb(255 255 255 / 0.92);
+}
+
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.home-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.home-hero__btn--primary {
+  background-color: var(--color-button-primary);
+  border-color: var(--color-button-primary);
+  color: var(--color-button-text);
+}
+
+.home-hero__btn--primary:hover {
+  background-color: var(--color-button-primary-hover);
+  border-color: var(--color-button-primary-hover);
+  color: var(--color-button-text);
+}
+
+[data-theme="dark"] .home-hero__btn--primary:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
+}
+
+.home-hero__btn--secondary {
+  border-color: rgb(255 255 255 / 0.85);
+  background-color: transparent;
+  color: #fff;
+}
+
+.home-hero__btn--secondary:hover {
+  background-color: rgb(255 255 255 / 0.16);
+  color: #fff;
+}
+
+.home-hero__btn:focus-visible,
+.home-hero__dot:focus-visible,
+.home-hero__pause:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.home-hero__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.home-hero__dots {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-hero__dot {
+  position: relative;
+  width: 3rem;
+  height: 2rem;
+  padding: 0;
+  border-radius: 0.25rem;
+  background-color: transparent;
+}
+
+.home-hero__dot::before,
+.home-hero__dot-fill {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 9999px;
+}
+
+.home-hero__dot::before {
+  background-color: rgb(255 255 255 / 0.4);
+}
+
+.home-hero__dot-fill {
+  background-color: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.home-hero__dot[aria-current="true"] .home-hero__dot-fill {
+  transform: scaleX(1);
+}
+
+.home-hero[data-playing="true"] .home-hero__dot[aria-current="true"] .home-hero__dot-fill {
+  animation: home-hero-progress var(--hero-interval) linear forwards;
+}
+
+/* Hovering the hero freezes the countdown. Must out-rank the rule above, whose
+   `animation` shorthand would otherwise reset the play state. */
+.home-hero[data-playing="true"]:hover .home-hero__dot[aria-current="true"] .home-hero__dot-fill {
+  animation-play-state: paused;
+}
+
+/* So does keyboard focus on the slide's links or the slide dots, but not on the
+   Pause/Play button itself: after pressing Play the slideshow must actually play.
+   Separate rule because browsers without :has() drop the whole rule. */
+.home-hero[data-playing="true"]:has(.home-hero__actions :focus-visible, .home-hero__dots :focus-visible)
+  .home-hero__dot[aria-current="true"] .home-hero__dot-fill {
+  animation-play-state: paused;
+}
+
+.home-hero__pause {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgb(255 255 255 / 0.6);
+  border-radius: 9999px;
+  background-color: rgb(255 255 255 / 0.14);
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.home-hero__pause:hover {
+  background-color: rgb(255 255 255 / 0.28);
+}
+
+@keyframes home-hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes home-hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@media (min-width: 48rem) {
+  .home-hero__inner {
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-menu,
+  .home-hero__slide-body {
+    animation: none;
+  }
+
+  .site-nav-link,
+  .site-nav-link::after,
+  .site-icon-btn,
+  .home-hero__img,
+  .home-hero__scrim,
+  .home-hero__btn,
+  .home-hero__pause {
+    transition: none;
+  }
+}

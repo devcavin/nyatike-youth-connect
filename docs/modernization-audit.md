@@ -4,12 +4,12 @@
 
 - Repository: https://github.com/devcavin/nyatike-youth-connect
 - Deployment: https://nyatike-youth-connect.vercel.app/ (**not inspected**: unreachable from the audit sandbox; see Limitations)
-- Audit date: 2026-10-18
-- Inspected artifact: `nyatike-youth-connect-main.zip`, as uploaded by the product owner (extracted to a scratch directory; the upload itself was not modified)
-- Branch and commit: **Unknown.** The archive contains no `.git` directory. The `-main` suffix suggests a GitHub branch archive of `main`, but that is an inference, not evidence.
-- Working-tree status: **Cannot be established.** Without `.git`, uncommitted local changes, untracked files, and stash state cannot be detected. If the owner has local changes not in this archive, they are not reflected here and must not be overwritten by any later work.
-- Audit status: **Phase Zero complete, pending owner review.** Sections 3–9 are filled from inspected evidence; open items are listed in sections 6, 10 and the Limitations list.
-- Implementation status: Not approved. No application source was changed. Only this file was edited.
+- Audit date: 2026-10-18 (Phase Zero). Updated 2026-10-19 (Milestone B-1: navigation bar and hero).
+- Inspected artifacts: `nyatike-youth-connect-main.zip` as uploaded by the product owner (2026-10-18), then a fresh clone of the now-public repository (2026-10-19). The upload itself was not modified.
+- Branch and commit: **Verified 2026-10-19** from a clone of the public repository: `main` at `a773a56`, equal to `origin/main`, 18 commits. The source tree is identical to the audited zip (`diff -r`, excluding `node_modules` and `dist`). The last application commit is `08ceb40` (2025-10-20, "Update: footer"); the four commits after it add only `AGENTS.md`, the charter, and this audit.
+- Working-tree status: the clone is clean. The owner states there are no pending local changes or unpushed commits (owner statement; a public clone cannot show local state). Milestone B-1 work is committed on the branch `feat/navbar-hero-modernization` (one commit on top of `a773a56`), not on `main`; the audit sandbox had no GitHub credentials, so it was delivered to the owner as a patch and a git bundle to push.
+- Audit status: Phase Zero complete. The owner authorized modernizing the navigation bar and the hero section on 2026-10-19; everything else in the plan still awaits review.
+- Implementation status: Milestone B-1 (navigation bar and hero) implemented and verified in the working tree (section 11, section 12). Nothing else has been changed. Committed on a feature branch only; nothing merged to `main` or deployed.
 
 ### Evidence legend
 
@@ -21,14 +21,18 @@
 
 ### Limitations of this inspection
 
-1. No Git metadata (above).
+1. Git state was verified from the public clone only; the owner's local state is known from their statement, not from inspection.
 2. The deployed site could not be reached (sandbox network allowlist). Repository-versus-deployment drift is **unassessed**.
 3. Google Fonts are blocked in the sandbox, so font rendering, font-loading cost, and the one console error / failed request seen in every run are sandbox artifacts, not product findings.
 4. Lighthouse ran locally against `vite preview` (not Vercel, not CDN). Mobile numbers use Lighthouse's simulated throttling. Treat as a baseline for relative comparison only.
 5. Only Chromium was used. No Firefox/Safari, no real devices, no screen reader. Keyboard checks were scripted (Tab order and computed styles), not a full manual pass.
-6. Contrast ratios were computed from the declared OKLCH tokens, converted to sRGB. Hero contrast was computed against near-black only (slide 1's artwork); the photographic slides 2–4 were not measured.
+6. Token contrast ratios were computed from the declared OKLCH tokens, converted to sRGB. The Phase Zero hero figures were measured against near-black only (slide 1); for the B-1 hero, contrast was measured from screenshots of the pixels behind the text, on all four slides at five viewport widths (see section 12).
+7. Lighthouse mobile performance varies a lot from run to run in this sandbox: the unchanged baseline code scored 96 in one run and 81, 82, 82 in three later runs. Compare builds back to back and prefer the observed FCP/LCP over the score.
+8. The Playwright verification scripts live outside the repository, and no automated tests were added: the project has no test tooling, and adding some is a dependency decision (D-05 territory) that has not been approved.
 
 ## 2. Executive summary
+
+**Update 2026-10-19.** Milestone B-1 (navigation bar and hero) is implemented in the working tree and verified; see section 11 and the change log. Findings F-02, F-03 (hero), F-04 (nav link), F-09 and parts of F-01 and F-10 are addressed; the status table at the top of section 9 shows exactly what remains. The rest of this summary is the Phase Zero record.
 
 **State.** A small React 19 + Vite 6 + Tailwind 4 single-page app with four routed pages (Home, About, Services, Blogs), no backend, no forms, no data fetching, no authentication, and no tests. The lint and production build both pass. Lighthouse baseline is good for performance (mobile 96 / desktop 99) and weaker for accessibility (80 / 87) and SEO (83).
 
@@ -60,8 +64,8 @@
 | Authentication and persistence | None. Only `sessionStorage` key `isDarkMode` for theme | [S] |
 | Forms | None in the routed app. (`ComponentShowcase.jsx` has a demo input but is not imported anywhere) | [S] |
 | Tests and static checks | No test runner, no tests, no type-check. ESLint 9 flat config present | [S] |
-| Deployment and CI | `vercel.json` rewrites everything to `/index.html`. No CI workflows in the archive | [S] |
-| Git baseline | Unknown (no `.git` in archive) | Limitation 1 |
+| Deployment and CI | `vercel.json` rewrites everything to `/index.html`. No CI workflows (no `.github/` at `HEAD`) | [S] |
+| Git baseline | `main` @ `a773a56`, clean public clone, source identical to the audited zip (verified 2026-10-19); history scan found no secrets or sensitive files | [B] |
 | Lint | `npx eslint .` exit 0, no output | [B] |
 | Build | `npx vite build` succeeded in 5.05 s: JS 285.07 kB (87.40 kB gzip), CSS 53.14 kB (9.53 kB gzip), images ≈ 0.9 MB | [B] |
 
@@ -195,7 +199,7 @@ Responsive: fixed navbar and mobile menu overlay content with no backing surface
 | Lint | Pass, exit 0, no warnings | `npx eslint .` [B] |
 | Type check | Not available (JavaScript project) | — |
 | Tests | None exist | — |
-| Initial load (mobile, simulated) | Perf **96**; FCP 1.7 s; LCP 2.4 s; TBT 110 ms; CLS 0; Speed Index 1.7 s | Lighthouse 12.8.2, local preview [B] |
+| Initial load (mobile, simulated) | Perf **96** in the first run (FCP 1.7 s, LCP 2.4 s), **not reproducible**: three later back-to-back runs of the same baseline code scored **81, 82, 82** (simulated LCP ≈ 4.5 s; observed FCP/LCP 0.3–0.5 s). Treat the baseline as roughly 80–96 and compare builds back to back | Lighthouse 12.8.2, local preview [B]; Limitation 7 |
 | Initial load (desktop) | Perf **99**; FCP 0.4 s; LCP 0.9 s; TBT 0; CLS 0 | same [B] |
 | Page weight | 755 KiB transferred (Lighthouse) | [B] |
 | JavaScript | 285 kB (87.4 kB gzip) single bundle, no code splitting | build output [B] |
@@ -204,9 +208,25 @@ Responsive: fixed navbar and mobile menu overlay content with no backing surface
 | Fonts | Blocking `@import` of 5 families; only 2 used; real impact unmeasured | [S]; sandbox blocks Google Fonts [Limitation 3] |
 | Console and network | Only the sandbox font failure; React Router "No routes matched" warnings on unrouted URLs | [R] |
 | Lighthouse other | Best practices 96; SEO 83 (no meta description; `robots.txt` request returns the SPA HTML locally; deployment behavior unverified) | [B] |
+| After Milestone B-1 (2026-10-19) | Mobile perf 79 (earlier runs 77–85, so no measurable difference from the 81–82 baseline), observed FCP 0.35 s / LCP 0.44 s, CLS 0. Desktop perf 99, CLS 0. Accessibility **93** mobile and desktop (baseline 80 / 87). SEO 83 (unchanged). JS 88.07 kB gzip (baseline 87.27, +0.8 kB), CSS 9.64 kB gzip (unchanged) | Lighthouse, local preview, same conditions [B] |
 | `npm audit` (production deps) | 32 advisories: 1 low, 6 moderate, 23 high, **2 critical** | [B]; see F-15 for interpretation |
 
 ## 9. Prioritized findings
+
+### Status after Milestone B-1 (2026-10-19)
+
+| Finding | Status | What was verified | Still open |
+|---|---|---|---|
+| F-01 Home CTAs inert | **Hero resolved**: real links to existing routes | Client-side navigation to `/services` and `/about` verified | The two bottom CTA buttons ("Join Our Community", "Get in Touch") still only `console.log`; slide 3's "Join Our Community" was removed pending D-01 |
+| F-02 Hidden hero slides interactive | **Resolved** | Only the active slide's text and controls are in the DOM; one `<h1>`; images are `aria-hidden` | — |
+| F-03 Illegible hero text | **Resolved for the hero** | Min 5.23:1 (white text vs brightest pixel behind it) on all slides at 320/375/768/1280/1920 px | **Root cause remains**: global unlayered `h1`/`p`/`a` rules still override Tailwind utilities on other pages (e.g. Home's bottom CTA section) |
+| F-04 Contact link / unknown URLs | **Partly**: the broken `/contavt` link is removed from the nav | — | No Contact destination (D-01); unknown URLs still render a blank page (no NotFound route yet) |
+| F-09 Carousel ignores reduced motion, no pause | **Resolved** | Pause/Play, hover and keyboard-focus pause, no autoplay under `prefers-reduced-motion` | — |
+| F-10 Reloads, no active state, small targets | **Resolved for the navbar and hero** | No reload on nav; `aria-current`; targets ≥44 px (nav) and 48×32 px (dots) | About's `<button>` inside `<a>`; footer links |
+| F-23 (new) `<nav>` and `<footer>` were nested inside `<main>` | **Resolved** | `header`, `main#main-content`, `footer` are siblings; skip link added | — |
+| F-24 (new, observation) The logo is a black seal, so it is low-contrast on the dark theme header | Open [H] | Seen in screenshots; not measured | Brand asset question (D-03) |
+| F-25 (new) Old `.hero-image*`, `.hero-text-*` CSS is now fully unreferenced | Open | No references in `src` | Remove during Milestone C |
+
 
 Severity: P0 critical, P1 high, P2 medium, P3 low. Confidence: H/M/L.
 
@@ -319,6 +339,7 @@ Options: (a) build minimal pages only for destinations the owner confirms; (b) l
 Recommendation: (b) or (c) first (smallest, truthful), no new forms or persistence unless you approve them separately.
 Impact: routes, product claims, any future data flow.
 Approval: Pending. Status: Open.
+Interim handling in B-1 (reversible, no invented destinations): the nav's "Contact Us" (which pointed at the non-route `/contavt`) is omitted, and the hero's "Join Our Community" (`/community`, not a route) is omitted. Restoring either is a one-line change in `Navbar.jsx` (`NAV_LINKS`) or `HomeHero.jsx` (slide 3 `cta`) once a destination is chosen.
 
 **D-02 — How to wire Tailwind 4 to the existing tokens**
 Evidence: F-07.
@@ -348,7 +369,7 @@ Approval: Pending. Status: Open.
 
 **D-07 — Unused `ComponentShowcase.jsx` / `ThemeToggle.jsx`.** Recommendation: keep `ComponentShowcase` as an internal token reference only if it will be routed or documented; otherwise remove. Approval: Pending. Status: Open (low).
 
-**D-08 — Hero carousel behavior.** Options: keep four slides with pause and reduced-motion support; reduce to a static hero with one headline. Recommendation: keep slides, fix interaction and accessibility first. Approval: Pending. Status: Open.
+**D-08 — Hero carousel behavior.** Options: keep four slides with pause and reduced-motion support; reduce to a static hero with one headline. Recommendation and B-1 choice: keep the four existing slides and copy, with a pause control, hover/keyboard pause, and no autoplay under reduced motion. Approval: implied by the owner's request to modernize the hero, but reversible. Status: **Implemented by default; owner may reverse.**
 
 ## 11. Implementation milestones
 
@@ -362,7 +383,18 @@ Acceptance criteria:
 - Findings prioritized with evidence: done (section 9).
 - Plan presented for review: this document.
 
-### Milestone B — Critical behavior (proposed; blocked until approval of D-01, D-02, D-04 as needed)
+### Milestone B-1 — Navigation bar and hero (implemented 2026-10-19, awaiting review)
+Scope (owner-authorized): the site header and the Home hero, plus the shared-shell changes they require.
+What changed and why:
+- `Navbar.jsx` rewritten: client-side `NavLink`s with `aria-current` and an active style; opaque header on the existing `--color-background`/`--color-border` tokens; wordmark beside the logo (from 380 px up); state-labelled theme toggle ("Switch to dark/light theme"); mobile menu as a real disclosure (`aria-expanded`, `aria-controls`, opaque panel, closes on route change, Escape, outside click, or widening to desktop; Escape returns focus to the button); 44 px targets; skip link.
+- `AppRoutes.jsx`: `<header>`, `<main id="main-content">`, `<footer>` are now siblings (previously `main` contained both); scroll resets to the top and focus moves to `main` on route change (needed now that navigation no longer reloads the page).
+- New `Subpages/HomeHero.jsx` (slide data and images moved out of `Home.jsx`, copy unchanged except the link labels below): one `<h1>` for the active slide; slide semantics; real links; progress-segment indicators (48×32 px targets); Pause/Play; autoplay driven by the active segment's CSS animation (7 s per slide, frozen on hover and on keyboard focus within the slide links or dots, off under reduced motion); white text on a scrim, measured at ≥5.23:1; the emblem slide shows the seal whole, beside the text on large screens and above it on small ones.
+- `index.css`: two clearly delimited sections appended (header, hero), using only existing tokens. They are **unlayered on purpose**: the global `a`/`h1`/`p` rules are unlayered and beat Tailwind utilities (F-03, F-07). No existing rule or token was changed.
+User-visible behavior changes: nav "Contact Us" removed (D-01); hero slide 3 loses "Join Our Community" (D-01); hero "Learn More" is now "Learn more about us" (generic link text failed Lighthouse's `link-text`), shown only when it leads somewhere different from the slide's own button; slide time 6 s → 7 s; hero height is the same on every slide (no layout shift when slides change); header wordmark added; theme toggle labels now state the action.
+Not changed (out of scope): Tailwind token wiring (D-02) and the global cascade fix (F-03/F-07 root cause), the modal, footer, bottom CTA section, other pages, dependencies, routes, content claims.
+Acceptance results: see section 12.
+
+### Milestone B — Critical behavior (remainder; B-1 above is done; the rest is proposed and blocked until approval of D-01, D-02, D-04 as needed)
 Scope: F-01, F-02, F-03 (layering), F-04, F-06, F-07, F-10 (links only), F-13 (remove/disable placeholder links).
 Order of work: (1) F-07 tokens into Tailwind per D-02, then F-03 base-layer fix, then screenshot pass; (2) routing: `Link`/`NavLink`, NotFound, fix `/contavt`, CTA destinations per D-01; (3) hero: inert inactive slides, single `h1`, pause/reduced-motion; (4) modal: opaque surface, dialog semantics, focus.
 Risks: visual shifts from newly applied classes; moving base styles into a layer changes cascade. Mitigation: before/after screenshots of all four routes, both themes, 375 and 1280 px.
@@ -392,12 +424,13 @@ Acceptance criteria: checks and results recorded; performance and accessibility 
 | Date | Reference | Summary | Areas affected | Tests executed and results | Outstanding | Next exact action |
 |---|---|---|---|---|---|---|
 | 2026-10-18 | Archive `nyatike-youth-connect-main.zip` (no Git metadata) | Phase Zero audit. **No application source changed.** Only `docs/modernization-audit.md` was rewritten. `npm ci`, `dist/`, and `node_modules/` exist only in the scratch copy used for the audit | `docs/modernization-audit.md` | `eslint .` exit 0; `vite build` OK (5.05 s); Lighthouse 12.8.2 mobile 96/80/96/83 and desktop 99/87/96/83 (perf/a11y/best-practices/SEO); scripted Chromium route, interaction, keyboard-order, modal, mobile-menu and reduced-motion checks; `npm audit` | Section 10 decisions; Git state; deployed-site comparison | Owner reviews this audit and answers D-01 to D-05 |
+| 2026-10-19 | Branch `feat/navbar-hero-modernization` from `main` @ `a773a56` (one commit on the branch, not on `main`) | Milestone B-1: navigation bar and hero (section 11). Files: `src/index.css` (+514 lines, append-only), `src/AppRoutes.jsx`, `src/components/Layouts/Navbar.jsx`, `src/components/Pages/Home.jsx` (hero code moved out), new `src/components/Pages/Subpages/HomeHero.jsx`. Also this document | See section 11 | `eslint .` exit 0 before and after. `vite build` OK. JS 88.07 kB gzip (+0.8), CSS 9.64 kB gzip (±0). **Playwright (Chromium) navigation suite 27/27**: landmarks, opaque fixed header, skip link, focus ring, client-side navigation (no reload), `aria-current`, scroll reset and focus on route change, theme toggle, mobile menu (open/Esc/outside click/link/resize/Back, DOM tab order), 320 px fit. **Hero suite 21/21**: one `<h1>`, links and destinations per slide, ~7.0 s autoplay and loop, Pause/Play, hover and keyboard-focus pause, Play resumes with focus on the button, reduced motion (no autoplay or animations, no Pause button, dots still work), dot targets and `aria-current`, image loading attributes, client-side CTA navigation, dark-theme buttons, no console errors beyond the sandbox font fetch. **Layout**: no horizontal overflow at 320/375/768/1280/1920 px on all 4 routes; hero height identical across slides at every width; text of `/`, `/about`, `/services`, `/blogs` outside header/footer/hero identical to the baseline build; hero text contrast ≥ 5.23:1 over 20 screenshot crops. **Lighthouse** (local): mobile 79/93/96/83, desktop 99/93/96/83 (perf/a11y/best-practices/SEO); CLS 0. Bugs found in my own first implementation and fixed before this entry: hamburger visible on desktop (unlayered `display` beat Tailwind's `md:hidden`), incomplete scroll reset (Chromium partly undoes an instant scroll during an in-flight smooth scroll), hover/focus pause defeated by CSS specificity, focus-pause freezing the slideshow after pressing Play, emblem artwork overlapping the headline, generic "Learn More" link text | **Not tested**: Firefox/Safari, real devices, screen readers, 200% zoom and text-spacing overrides, the deployed site. Open: D-01 (Contact, Join Our Community), D-02, D-03, D-04, D-05; F-03/F-07 root cause; NotFound route; modal; footer; bottom CTA; `:has()` is needed for keyboard-focus pause (older browsers still get hover-pause and the Pause button); the same-day baseline re-measure showed mobile Lighthouse variance (Limitation 7) | Owner reviews the patch, answers D-01, then Milestone B continues (F-07/F-03 cascade fix with screenshots, NotFound, modal) |
 
 ## 13. Current next step
 
-1. Review sections 2, 9 and 10. Answer D-01 (contact/community/register destinations), D-02 (Tailwind wiring), D-03 (brand confirmation), D-04 (content truth pass), D-05 (dependency cleanup). D-06 to D-08 can wait.
-2. Provide the repository's Git status (`git status`, current branch, `git log -1`) from your working copy so uncommitted changes can be accounted for before any edits.
-3. Optionally provide a screenshot or access to the deployed site for a repository-versus-deployment comparison.
-4. On approval, begin Milestone B in a dedicated branch or worktree. No commit, push, merge, or deploy without explicit authorization.
+1. Review the Milestone B-1 patch (navigation bar and hero). To try it: apply it on a new branch, run `npm ci && npm run lint && npm run build && npm run dev`, and look at `/` in light and dark themes at phone and desktop widths. Nothing has been merged to `main` or deployed.
+2. Answer D-01: where should "Contact" (nav) and "Join Our Community" (hero slide 3) go? The channels you want to expose (for example a WhatsApp number or group link, an email address, Instagram) decide this; both are one-line restores.
+3. Decide D-02 (wire the existing tokens into Tailwind v4) so Milestone B can fix the cascade root cause (F-03/F-07) with before/after screenshots, then add a NotFound route and fix the About modal. D-03 to D-05 as before.
+4. Optional: screenshots or access to the deployed site, and a real-device or screen-reader check of the new header and hero.
 
 This audit is a living engineering record, not a substitute for inspecting the current code or verifying behavior.
